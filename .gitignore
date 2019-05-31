@@ -1,0 +1,57 @@
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## Mac-specific
+.DS_Store
+
+## Build generated
+build/
+DerivedData
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+
+## Other
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+/.idea
+*.orig
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+
+## phraseapp
+.phraseapp.yml
+phraseapp.yml
+
+# fastlane specific
+fastlane/report.xml
+
+# deliver temporary files
+fastlane/Preview.html
+
+# snapshot generated screenshots
+fastlane/screenshots
+
+# scan temporary files
+fastlane/test_output
+
+# GraphQL
+node_modules
+
+#Generated GraphQL files
+# Wunder/GraphQL/Generated/Swift/*.graphql.swift
+R.generated.swift
+
