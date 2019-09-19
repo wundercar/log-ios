@@ -25,7 +25,7 @@ public struct LogMessage {
 // MARK: Public methods
 
 extension LogMessage {
-    var formattedString: String {
+    public var formattedString: String {
         let components: [String] = [
             self.emoji,
             " ",
