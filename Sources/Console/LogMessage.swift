@@ -3,14 +3,14 @@ import Foundation
 public struct LogMessage {
     // MARK: Properties
     
-    var emoji: String?
-    var date: Date
-    var message: String
-    var level: LogLevel
-    var filename: String
-    var line: Int
-    var column: Int
-    var funcName: String
+    public var emoji: String?
+    public var date: Date
+    public var message: String
+    public var level: LogLevel
+    public var filename: String
+    public var line: Int
+    public var column: Int
+    public var funcName: String
     
     private static var dateFormat = "dd/MM/yyyy hh:mm:ss"
     private static var dateFormatter: DateFormatter {
