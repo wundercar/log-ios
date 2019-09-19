@@ -12,12 +12,12 @@ open class BaseLogger {
     
     public required init(level: LogLevel = .verbose, maxEntries: Int = 100) {
         self.level = level
-        self.history = CircularArray(maxEntries: maxEntries)
+        history = CircularArray(maxEntries: maxEntries)
     }
     
     // MARK: - Overrides
     
-    open func print(message: String) {
+    open func print(message: LogMessage) {
         fatalError("Implement in specific Logger")
     }
 }
@@ -30,7 +30,7 @@ extension BaseLogger: Logger {
         line: Int = #line,
         column: Int = #column,
         funcName: String = #function) {
-        return self._log(message, level: .verbose, filename: filename, line: line, column: column, funcName: funcName)
+        return _log(message, level: .verbose, filename: filename, line: line, column: column, funcName: funcName)
     }
     
     // swiftlint:disable:next identifier_name
@@ -46,7 +46,7 @@ extension BaseLogger: Logger {
             return
         }
         
-        let messagesJoined: String = self.format(message)
+        let messagesJoined: String = format(message)
         
         let logMessage = LogMessage(
             emoji: level.emoji,
@@ -58,14 +58,12 @@ extension BaseLogger: Logger {
             column: column,
             funcName: funcName)
         
-        self.history.append(logMessage)
-        
-        let logMessageString = logMessage.formattedString
-        self.print(message: logMessageString)
+        history.append(logMessage)
+        print(message: logMessage)
     }
     
     public func change(logLevel: LogLevel) {
-        self.level = logLevel
+        level = logLevel
     }
 }
 
@@ -73,7 +71,7 @@ private extension BaseLogger {
     func format(_ messages: [Any]) -> String {
         let result = messages
             .map {
-                return String(describing: $0)
+                String(describing: $0)
             }
             .joined(separator: " ")
         return result
