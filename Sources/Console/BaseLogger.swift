@@ -20,6 +20,7 @@ open class BaseLogger {
     open func print(message: String) {
         fatalError("Implement in specific Logger")
     }
+    
 }
 
 extension BaseLogger: Logger {
@@ -41,6 +42,7 @@ extension BaseLogger: Logger {
         line: Int = #line,
         column: Int = #column,
         funcName: String = #function) {
+        
         // Filter out log events by level
         guard level.rawValue >= self.level.rawValue else {
             return
@@ -67,6 +69,7 @@ extension BaseLogger: Logger {
     public func change(logLevel: LogLevel) {
         self.level = logLevel
     }
+
 }
 
 private extension BaseLogger {
@@ -80,23 +83,3 @@ private extension BaseLogger {
     }
 }
 
-private extension LogLevel {
-    var emoji: String {
-        switch self {
-        case .verbose:
-            return "🔳"
-        case .debug:
-            return "◽️"
-        case .info:
-            return "🔷"
-        case .warning:
-            return "🔶"
-        case .error:
-            return "🛑"
-        case .critical:
-            return "💥"
-        case .none:
-            return ""
-        }
-    }
-}

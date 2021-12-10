@@ -3,14 +3,14 @@ import Foundation
 public struct LogMessage {
     // MARK: Properties
     
-    var emoji: String?
-    var date: Date
-    var message: String
-    var level: LogLevel
-    var filename: String
-    var line: Int
-    var column: Int
-    var funcName: String
+    public var emoji: String
+    public var date: Date
+    public var message: String
+    public var level: LogLevel
+    public var filename: String
+    public var line: Int
+    public var column: Int
+    public var funcName: String
     
     private static var dateFormat = "dd/MM/yyyy hh:mm:ss"
     private static var dateFormatter: DateFormatter {
@@ -20,16 +20,12 @@ public struct LogMessage {
         formatter.timeZone = TimeZone.current
         return formatter
     }
-}
-
-// MARK: Public methods
-
-extension LogMessage {
-    var formattedString: String {
+    
+    public var formattedString: String {
         let components: [String] = [
             self.emoji,
             " ",
-            self.format(date: Date()),
+            self.format(date: self.date),
             " [",
             self.sourceFileName(filePath: self.filename),
             ": ",
@@ -40,17 +36,17 @@ extension LogMessage {
             // self.funcName,
             self.message
         ]
-        .compactMap { $0 }
         
         let result = components.joined(separator: "")
         
         return result
     }
+    
 }
 
 // MARK: Private methods
-
 private extension LogMessage {
+    
     func format(date: Date) -> String {
         return type(of: self).dateFormatter.string(from: date)
     }
@@ -59,4 +55,7 @@ private extension LogMessage {
         let components = filePath.components(separatedBy: "/")
         return components.isEmpty ? "" : components.last!
     }
+    
 }
+
+extension LogMessage: Equatable {}
